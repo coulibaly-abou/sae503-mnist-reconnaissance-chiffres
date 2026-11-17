@@ -73,6 +73,7 @@ B_N = C["bootstrap_B"]
 # Page de garde
 # ---------------------------------------------------------------------------
 remplacer_paragraphe(trouver("Version de travail"), "Décembre 2026")
+remplacer_paragraphe(trouver("IUT de Perpignan"), "IUT de Carcassonne – Année universitaire 2026-2027")
 p = trouver("Exploration, qualité et modélisation")
 remplacer_paragraphe(p, "Exploration, qualité et modélisation du jeu de données MNIST")
 

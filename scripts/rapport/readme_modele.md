@@ -4,7 +4,7 @@
 
 **Application en ligne : https://mnist-reconnaissance-chiffres.streamlit.app/** : dessinez un chiffre, le modèle le reconnaît.
 
-Projet de BUT Science des Données (3e année, 2026-2027, IUT de Perpignan, enseignant : Sébastien Pinel).
+Projet de BUT Science des Données (3e année, 2026-2027, IUT de Carcassonne, enseignant : Sébastien Pinel).
 Auteurs : **Ayi AMAVIGAN** et **Aboubakar COULIBALY**.
 
 On part des 70 000 images de chiffres manuscrits de MNIST pour suivre tout le processus de data mining :

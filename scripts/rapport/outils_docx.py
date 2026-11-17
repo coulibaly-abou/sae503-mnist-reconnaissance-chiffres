@@ -165,12 +165,20 @@ def _remplir(cellule, texte, gras=False):
 
 
 def remplacer_paragraphe(par, texte):
-    """Remplace le texte d'un paragraphe en gardant sa mise en forme de paragraphe."""
+    """Remplace le texte d'un paragraphe en gardant sa mise en forme (paragraphe et caractères)."""
+    rpr = None
+    if par.runs and par.runs[0]._r.rPr is not None:
+        rpr = copy.deepcopy(par.runs[0]._r.rPr)
     for r in list(par.runs):
         r._r.getparent().remove(r._r)
     for h in par._p.findall(qn("w:hyperlink")):
         par._p.remove(h)
     _runs(par, texte)
+    if rpr is not None and "**" not in texte:
+        for r in par.runs:
+            if r._r.rPr is not None:
+                r._r.remove(r._r.rPr)
+            r._r.insert(0, copy.deepcopy(rpr))
     return par
 
 
