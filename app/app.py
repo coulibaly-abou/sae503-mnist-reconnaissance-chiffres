@@ -84,7 +84,7 @@ def afficher_prediction(image28, colonne_image=None, verite=None):
                      "environ 20 % (jamais plus de 45 % dans MNIST). Effacez et écrivez un seul chiffre.",
                      icon=":material/block:")
             st.caption(f"Pour information, la forme la plus proche serait un {classe} "
-                       f"({100 * p[classe]:.0f} %), ce qui n'a pas de sens ici.".replace(".", ","))
+                       f"({100 * p[classe]:.0f} %), ce qui n'a pas de sens ici.")
             return
         p_chiffre = float(probabilites(detecteur, image28[None])[0, 1]) if detecteur is not None else 1.0
         if verite is None and p_chiffre < 0.5:
