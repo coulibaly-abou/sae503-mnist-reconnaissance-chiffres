@@ -1,0 +1,16 @@
+génération des non-chiffres…
+positifs : 20000 MNIST, 10000 au trait épais, 4000 en police
+apprentissage…
+    époque 1/4 : perte 0.1923
+    époque 2/4 : perte 0.0854
+    époque 3/4 : perte 0.0587
+    époque 4/4 : perte 0.0481
+{
+ "seuil": 0.5,
+ "chiffres_test_acceptes_pct": 99.22,
+ "chiffres_polices_acceptes_pct": 99.2,
+ "non_chiffres_rejetes_pct": 99.53,
+ "n_test": 10000,
+ "n_polices": 120,
+ "n_non_chiffres_validation": 3000
+}

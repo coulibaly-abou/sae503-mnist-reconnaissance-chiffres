@@ -13,7 +13,7 @@ import torch.nn.functional as F
 
 
 class PetitCNN(nn.Module):
-    def __init__(self, dropout=0.25, filtres=32):
+    def __init__(self, dropout=0.25, filtres=32, sorties=10):
         super().__init__()
         f = filtres
         self.bloc1 = nn.Sequential(
@@ -28,7 +28,7 @@ class PetitCNN(nn.Module):
         )
         self.tete = nn.Sequential(
             nn.Flatten(), nn.Linear(2 * f * 7 * 7, 128), nn.ReLU(),
-            nn.Dropout(dropout), nn.Linear(128, 10),
+            nn.Dropout(dropout), nn.Linear(128, sorties),
         )
 
     def forward(self, x):
@@ -57,12 +57,12 @@ def vers_tenseur(images):
 
 
 def entrainer(images, etiquettes, epoques=6, lr=1e-3, dropout=0.25, augmentation=False,
-              taille_lot=128, graine=0, journal=None):
+              taille_lot=128, graine=0, journal=None, sorties=10):
     torch.manual_seed(graine)
     np.random.seed(graine)
     x = vers_tenseur(images)
     y = torch.from_numpy(np.asarray(etiquettes, dtype=np.int64))
-    modele = PetitCNN(dropout=dropout)
+    modele = PetitCNN(dropout=dropout, sorties=sorties)
     opt = torch.optim.Adam(modele.parameters(), lr=lr)
     planif = torch.optim.lr_scheduler.CosineAnnealingLR(opt, T_max=epoques)
     n = len(y)

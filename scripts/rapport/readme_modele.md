@@ -30,6 +30,17 @@ streamlit run app/app.py
 Trois onglets : **Dessiner** (souris ou doigt), **Images MNIST** (images du test tirées au hasard) et
 **Importer une image** (photo d'un chiffre écrit au feutre). L'onglet **Le modèle** reprend les résultats.
 
+**Et si on dessine n'importe quoi ?** Le classifieur a appris à choisir entre 0 et 9 : face à un
+gribouillis, il répond quand même un chiffre, parfois avec 100 % de confiance. L'application filtre donc
+chaque dessin avant de répondre :
+
+1. un dessin qui remplit plus de 45 % de l'image est refusé (aucun chiffre de MNIST ne dépasse 44,8 %) ;
+2. un second réseau, le **détecteur « chiffre / pas un chiffre »** (`scripts/detecteur_non_chiffre.py`),
+   entraîné sur MNIST et sur 30 000 dessins générés (gribouillis, étoiles, zigzags, formes pleines,
+   lettres, deux chiffres côte à côte), refuse ce qui n'est pas un chiffre. Validation : {DET_OK} % des
+   chiffres du test MNIST et {DET_POL} % des chiffres en police acceptés, {DET_NEG} % des non-chiffres refusés ;
+3. une prédiction sous 70 % de confiance est signalée comme incertaine.
+
 Déploiement sur Streamlit Community Cloud : choisir ce dépôt, la branche `main` et le fichier `app/app.py`
 (les dépendances sont lues dans `app/requirements.txt`).
 
@@ -44,9 +55,10 @@ Déploiement sur Streamlit Community Cloud : choisir ce dépôt, la branche `mai
 | `scripts/modelisation.py` | Parties 7 et 8 : bootstrap, sélection ACP, 7 modèles, grid search, test |
 | `scripts/cnn.py`, `scripts/pretraitement.py` | Réseau convolutif (PyTorch) et mise au format MNIST d'un dessin |
 | `scripts/test_chiffres_externes.py` | Test du modèle sur des chiffres écrits avec des polices Windows |
+| `scripts/detecteur_non_chiffre.py` | Détecteur « chiffre / pas un chiffre » utilisé comme filtre par l'application |
 | `scripts/gantt.py`, `scripts/resume_graphique.py`, `scripts/flowchart.py` | Figures du rapport |
 | `scripts/rapport/` | Construction du rapport Word à partir des résultats (python-docx, Word pour le PDF) |
-| `app/` | Application Streamlit, modèle entraîné (`modele_cnn.pt`) et 1 000 images de test |
+| `app/` | Application Streamlit, modèle entraîné (`modele_cnn.pt`), détecteur (`detecteur.pt`) et 1 000 images de test |
 | `figures/`, `resultats/` | Figures (PNG 200 dpi), tableaux CSV et chiffres clés JSON |
 | `rapport/` | Rapport final (docx et pdf) et version de travail du 16 octobre |
 

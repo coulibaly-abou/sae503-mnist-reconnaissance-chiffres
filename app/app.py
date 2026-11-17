@@ -32,6 +32,19 @@ def charger_modele():
     return modele, sauvegarde["accuracy_test_pct"]
 
 
+@st.cache_resource
+def charger_detecteur():
+    """Second réseau à 2 sorties : 0 = pas un chiffre, 1 = chiffre (scripts/detecteur_non_chiffre.py)."""
+    chemin = ICI / "detecteur.pt"
+    if not chemin.exists():
+        return None
+    sauvegarde = torch.load(chemin, map_location="cpu", weights_only=True)
+    det = PetitCNN(dropout=sauvegarde["dropout"], sorties=2)
+    det.load_state_dict(sauvegarde["etat"])
+    det.eval()
+    return det
+
+
 @st.cache_data
 def charger_exemples():
     d = np.load(ICI / "exemples_test.npz")
@@ -44,25 +57,55 @@ def charger_resultats():
 
 
 modele, acc_test = charger_modele()
+detecteur = charger_detecteur()
+
+
+# Garde-fous : le modèle choisit toujours entre 0 et 9, il ne sait pas dire « ce n'est pas un chiffre ».
+# - Aucun chiffre de MNIST n'a plus de 44,8 % de pixels encrés (moyenne 19 %) : au-delà de 45 %,
+#   le dessin est trop rempli pour être un chiffre.
+# - Moins de 0,4 % des vrais chiffres du test sont prédits avec moins de 70 % de confiance.
+ENCRE_MAX_PCT = 45
+CONFIANCE_MIN = 0.70
 
 
 def afficher_prediction(image28, colonne_image=None, verite=None):
     """Affiche l'image vue par le modèle, la classe prédite et les probabilités."""
     p = probabilites(modele, image28[None])[0]
     classe = int(p.argmax())
+    encre_pct = 100 * (image28 > 0).mean()
     g, d = st.columns([1, 2])
     with g:
         st.image(Image.fromarray(image28).resize((168, 168), Image.NEAREST),
                  caption="Ce que voit le modèle (28 x 28)")
     with d:
-        texte = f"## Chiffre reconnu : **{classe}**"
-        if verite is not None:
-            texte += "  :green[(correct)]" if classe == verite else f"  :red[(la bonne réponse était {verite})]"
-        st.markdown(texte)
-        st.markdown(f"Confiance du modèle : **{100 * p[classe]:.1f} %**".replace(".", ","))
-        if p[classe] < 0.6:
-            st.warning("Le modèle hésite. Essayez d'écrire le chiffre plus grand et bien au centre.",
-                       icon=":material/help:")
+        if verite is None and encre_pct > ENCRE_MAX_PCT:
+            st.markdown("## Ce n'est pas un chiffre")
+            st.error(f"Le dessin remplit {encre_pct:.0f} % de l'image, alors qu'un chiffre manuscrit en occupe "
+                     "environ 20 % (jamais plus de 45 % dans MNIST). Effacez et écrivez un seul chiffre.",
+                     icon=":material/block:")
+            st.caption(f"Pour information, la forme la plus proche serait un {classe} "
+                       f"({100 * p[classe]:.0f} %), ce qui n'a pas de sens ici.".replace(".", ","))
+            return
+        p_chiffre = float(probabilites(detecteur, image28[None])[0, 1]) if detecteur is not None else 1.0
+        if verite is None and p_chiffre < 0.5:
+            st.markdown("## Ce n'est pas un chiffre")
+            st.error(f"Le détecteur estime à {100 * (1 - p_chiffre):.0f} % que ce dessin n'est pas un chiffre "
+                     "(gribouillis, lettre, plusieurs chiffres…). Effacez et écrivez un seul chiffre.",
+                     icon=":material/block:")
+            st.caption(f"Pour information, le classifieur aurait répondu {classe} ({100 * p[classe]:.0f} %) : "
+                       "il choisit toujours entre 0 et 9, d'où ce filtre.")
+            return
+        if verite is None and p[classe] < CONFIANCE_MIN:
+            st.markdown("## Je ne reconnais pas de chiffre")
+            st.warning(f"Le modèle n'est sûr qu'à {100 * p[classe]:.0f} % (seuil : 70 %). Le chiffre le plus "
+                       f"proche serait un **{classe}**. Écrivez le chiffre plus grand, bien au centre, "
+                       "d'un seul tracé net.", icon=":material/help:")
+        else:
+            texte = f"## Chiffre reconnu : **{classe}**"
+            if verite is not None:
+                texte += "  :green[(correct)]" if classe == verite else f"  :red[(la bonne réponse était {verite})]"
+            st.markdown(texte)
+            st.markdown(f"Confiance du modèle : **{100 * p[classe]:.1f} %**".replace(".", ","))
         df = pd.DataFrame({"chiffre": [str(i) for i in range(10)], "probabilité (%)": 100 * p})
         st.bar_chart(df, x="chiffre", y="probabilité (%)", height=220)
 
@@ -137,7 +180,9 @@ onglet_dessin, onglet_mnist, onglet_photo, onglet_modele = st.tabs(
 
 with onglet_dessin:
     st.markdown("Dessinez **un seul chiffre** dans le cadre noir, à la souris ou au doigt. "
-                "La prédiction apparaît dès que vous relâchez.")
+                "La prédiction apparaît dès que vous relâchez. Le modèle a appris à choisir entre 0 et 9 : "
+                "si le dessin ne ressemble à aucun chiffre (cadre rempli, gribouillis), l'application le signale "
+                "au lieu d'inventer une réponse.")
     g, d = st.columns([1, 1.6])
     with g:
         epaisseur = st.slider("Épaisseur du trait", 10, 30, 18)

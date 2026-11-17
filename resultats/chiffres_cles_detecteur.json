@@ -1,0 +1,9 @@
+{
+ "seuil": 0.5,
+ "chiffres_test_acceptes_pct": 99.22,
+ "chiffres_polices_acceptes_pct": 99.2,
+ "non_chiffres_rejetes_pct": 99.53,
+ "n_test": 10000,
+ "n_polices": 120,
+ "n_non_chiffres_validation": 3000
+}
