@@ -13,6 +13,12 @@ import pandas as pd
 sys.path.insert(0, str(Path(__file__).parent))
 import outils_docx  # noqa: E402
 from outils_docx import Curseur, remplacer_paragraphe, supprimer, times_partout  # noqa: E402
+from reecritures import REECRITURES  # noqa: E402
+GH = "https://github.com/coulibaly-abou/sae503-mnist-reconnaissance-chiffres"
+APP = "https://mnist-reconnaissance-chiffres.streamlit.app/"
+def gh(chemin):
+    return f"{GH}/blob/main/{chemin}"
+
 
 P = Path(__file__).resolve().parents[2]
 FIG, RES = P / "figures", P / "resultats"
@@ -37,9 +43,13 @@ NOUVEAUX_TEXTES = []
 ANCIENS_P = {q._p for q in doc.paragraphs}
 
 
+def _norm(t):
+    return t.replace(" ", " ").replace(" ", " ")
+
+
 def trouver(debut, style=None):
     for p in doc.paragraphs:
-        if p.text.startswith(debut) and (style is None or p.style.name == style):
+        if _norm(p.text).startswith(_norm(debut)) and (style is None or p.style.name == style):
             return p
     raise KeyError(debut)
 
@@ -72,8 +82,15 @@ B_N = C["bootstrap_B"]
 # ---------------------------------------------------------------------------
 # Page de garde
 # ---------------------------------------------------------------------------
-remplacer_paragraphe(trouver("Version de travail"), "Décembre 2026")
 remplacer_paragraphe(trouver("IUT de Perpignan"), "IUT de Carcassonne – Année universitaire 2026-2027")
+p_date = trouver("Version de travail")
+cur = Curseur(p_date)
+for t in [f"Application en ligne : [mnist-reconnaissance-chiffres.streamlit.app]({APP})",
+          f"Code et données : [github.com/coulibaly-abou/sae503-mnist-reconnaissance-chiffres]({GH})"]:
+    q = cur.texte(t); q.alignment = 1; q.paragraph_format.space_after = 0
+remplacer_paragraphe(p_date, "Décembre 2026")
+for debut, texte in REECRITURES.items():
+    remplacer_paragraphe(trouver(debut), texte)
 p = trouver("Exploration, qualité et modélisation")
 remplacer_paragraphe(p, "Exploration, qualité et modélisation du jeu de données MNIST")
 
@@ -139,7 +156,7 @@ remplacer_paragraphe(trouver("À compléter – préciser l'outil de dépôt com
     "Tout le projet est rangé dans un dossier Google Drive partagé, SAE_DATAMING, organisé comme un projet de "
     "code : docs/ (sujet, article), data/ (fichiers MNIST), notebooks/ et scripts/ (code), figures/ et "
     "resultats/ (sorties) et rapport/. Une copie versionnée, qui contient aussi l'application, est publiée sur "
-    "GitHub : github.com/coulibaly-abou/sae503-mnist-reconnaissance-chiffres. Ayi AMAVIGAN a surtout pris en "
+    f"GitHub : [github.com/coulibaly-abou/sae503-mnist-reconnaissance-chiffres]({GH}). Ayi AMAVIGAN a surtout pris en "
     "charge la présentation, la qualité et l'exploration des données ainsi que la détection d'anomalies "
     "(parties 3 à 6). Aboubakar COULIBALY s'est occupé du bootstrap, de la classification, de l'application et "
     "de la mise en forme du rapport (parties 7 et 8). La bibliographie, les choix de méthode et la relecture "
@@ -349,7 +366,8 @@ cur.texte(
     "rappelait la carte de la partie 5, restent le cas le plus risqué.")
 cur.texte(
     "Pour que chacun puisse faire ce test, nous avons mis en ligne une application Streamlit "
-    "(mnist-reconnaissance-chiffres.streamlit.app) : on y dessine un chiffre, on tire une image du test ou on "
+    f"([mnist-reconnaissance-chiffres.streamlit.app]({APP}), présentée en annexe 4) : on y dessine un "
+    "chiffre, on tire une image du test ou on "
     "importe une photo. Les premiers essais ont montré que le classifieur répond toujours un chiffre, même "
     "devant un cadre rempli ou une étoile. L'application filtre donc les dessins : elle refuse un tracé qui "
     "couvre plus de 45 % de l'image, puis un second réseau, entraîné à distinguer les chiffres de dessins "
@@ -476,12 +494,21 @@ supprimer(p)
 
 p = trouver("L'ensemble du code est fourni dans le notebook")
 remplacer_paragraphe(p, (
-    "Le code complet est sur GitHub (github.com/coulibaly-abou/sae503-mnist-reconnaissance-chiffres) et l'application est en ligne (mnist-reconnaissance-chiffres.streamlit.app). Les "
-    "parties 3 à 5 sont dans notebooks/SAE503_MNIST_exploration.ipynb, la partie 6 dans "
-    "notebooks/SAE503_MNIST_anomalies.ipynb, les parties 7 et 8 dans scripts/modelisation.py (avec "
-    "scripts/cnn.py pour le réseau convolutif) et le test sur les polices dans "
-    "scripts/test_chiffres_externes.py. L'application est dans app/app.py. Nous reproduisons ici trois "
-    "extraits courts. Premier extrait : la lecture des fichiers IDX avec contrôle de l'en-tête."))
+    f"Tout le code est sur GitHub, dans le dépôt [sae503-mnist-reconnaissance-chiffres]({GH}). Chaque lien "
+    "ci-dessous ouvre le fichier complet."))
+cur = Curseur(p)
+for chemin, role in [
+        ("notebooks/SAE503_MNIST_exploration.ipynb", "parties 3 à 5 : présentation, qualité, exploration"),
+        ("notebooks/SAE503_MNIST_anomalies.ipynb", "partie 6 : détection d'anomalies"),
+        ("scripts/modelisation.py", "parties 7 et 8 : bootstrap, sélection, modèles, grid search, test"),
+        ("scripts/cnn.py", "réseau convolutif (PyTorch)"),
+        ("scripts/test_chiffres_externes.py", "test sur les chiffres écrits avec des polices"),
+        ("scripts/detecteur_non_chiffre.py", "détecteur « chiffre / pas un chiffre » de l'application"),
+        ("app/app.py", "application Streamlit"),
+]:
+    cur.texte(f"[{chemin}]({gh(chemin)}) : {role}", puce=True)
+cur.texte("Nous reproduisons ici trois extraits courts. Premier extrait : la lecture des fichiers IDX avec "
+          "contrôle de l'en-tête.")
 dernier_code = [q for q in doc.paragraphs if q.text.strip().startswith("return magique, dims")][0]
 EXTRAITS = [
     ("Deuxième extrait : le bootstrap de l'accuracy et de l'écart entre les deux modèles (partie 7).", [
@@ -523,6 +550,22 @@ FIGS["err"] = cur.legende("Figure", "Images du test mal classées par le réseau
 cur.image(FIG / "fig8_6_chiffres_externes.png", 13)
 FIGS["ext"] = cur.legende("Figure", "Chiffres écrits avec 12 polices de Windows : chiffre prédit au-dessus de chaque image "
                       "(vert : correct, rouge : erreur)")
+cur.titre("Annexe 4 – Application en ligne")
+cur.texte(f"L'application est accessible ici : [mnist-reconnaissance-chiffres.streamlit.app]({APP}). Son code "
+          f"est dans [app/app.py]({gh('app/app.py')}). Elle a quatre onglets :")
+for t in ["**Dessiner** : on trace un chiffre à la souris ou au doigt, et le modèle affiche le chiffre reconnu, "
+          "sa confiance et les probabilités des dix classes (figure suivante) ;",
+          "**Images MNIST** : on tire au hasard une image du jeu de test et on compare la réponse du modèle à la "
+          "bonne réponse ;",
+          "**Importer une image** : on envoie la photo d'un chiffre écrit au feutre sur une feuille blanche ;",
+          "**Le modèle** : les résultats sur le test, l'intervalle de confiance et l'erreur par chiffre."]:
+    cur.texte(t, puce=True)
+cur.image(FIG / "figA4_application_chiffre.png", 15.5)
+FIGS["app1"] = cur.legende("Figure", "Application en ligne : un 3 dessiné à la souris est reconnu")
+cur.texte("Quand le dessin n'est pas un chiffre (cadre rempli, gribouillis, lettre), l'application le dit au "
+          "lieu d'inventer une réponse :")
+cur.image(FIG / "figA4_application_refus.png", 15.5)
+FIGS["app2"] = cur.legende("Figure", "Application en ligne : un cadre entièrement rempli est refusé")
 
 
 # ---------------------------------------------------------------------------
@@ -554,6 +597,24 @@ for q in doc.paragraphs:
         elif q._p in ANCIENS_P:
             txt = re.sub(r"([Ff]igures? )(\d+)", lambda m: m.group(1) + str(ancien_vers_nouveau.get(int(m.group(2)), int(m.group(2)))), txt)
         t.text = txt
+
+# ---------------------------------------------------------------------------
+# Pas de page blanche : sauts de page explicites -> « saut de page avant » sur le titre suivant
+# ---------------------------------------------------------------------------
+from docx.text.paragraph import Paragraph as _P  # noqa: E402
+_W = "{http://schemas.openxmlformats.org/wordprocessingml/2006/main}"
+for titre in ["Liste des figures", "Liste des tableaux", "Liste des acronymes"]:
+    cible = next((q for q in doc.paragraphs if q.text.strip() == titre), None)
+    if cible is None:
+        continue
+    prec = cible._p.getprevious()
+    while prec is not None and prec.tag == _W + "p" and not "".join(t.text or "" for t in prec.iter(_W + "t")).strip():
+        a_saut = any(br.get(_W + "type") == "page" for br in prec.iter(_W + "br"))
+        suivant = prec.getprevious()
+        if a_saut:
+            prec.getparent().remove(prec)
+            cible.paragraph_format.page_break_before = True
+        prec = suivant
 
 # ---------------------------------------------------------------------------
 # Police Times New Roman partout, puis enregistrement

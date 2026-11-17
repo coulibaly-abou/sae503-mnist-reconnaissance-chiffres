@@ -20,10 +20,30 @@ def _nouveau_p(ancre, avant=False):
     return Paragraph(p, ancre._parent)
 
 
+def lien(par, texte, url):
+    """Ajoute un lien hypertexte cliquable (bleu, souligné) à la fin du paragraphe."""
+    from docx.opc.constants import RELATIONSHIP_TYPE as RT
+    r_id = par.part.relate_to(url, RT.HYPERLINK, is_external=True)
+    h = OxmlElement("w:hyperlink")
+    h.set(qn("r:id"), r_id)
+    r = OxmlElement("w:r")
+    rpr = OxmlElement("w:rPr")
+    c = OxmlElement("w:color"); c.set(qn("w:val"), "0563C1"); rpr.append(c)
+    u = OxmlElement("w:u"); u.set(qn("w:val"), "single"); rpr.append(u)
+    r.append(rpr)
+    t = OxmlElement("w:t"); t.text = texte; t.set(qn("xml:space"), "preserve"); r.append(t)
+    h.append(r)
+    par._p.append(h)
+
+
 def _runs(par, texte, taille=None, couleur=None):
-    """Écrit un texte avec **gras** et *italique* simples."""
-    for morceau in re.split(r"(\*\*[^*]+\*\*|\*[^*]+\*)", texte):
+    """Écrit un texte avec **gras**, *italique* et [liens](https://…) simples."""
+    for morceau in re.split(r"(\[[^\]]+\]\(https?://[^)]+\)|\*\*[^*]+\*\*|\*[^*]+\*)", texte):
         if not morceau:
+            continue
+        m = re.fullmatch(r"\[([^\]]+)\]\((https?://[^)]+)\)", morceau)
+        if m:
+            lien(par, m.group(1), m.group(2))
             continue
         if morceau.startswith("**"):
             r = par.add_run(morceau[2:-2]); r.bold = True
