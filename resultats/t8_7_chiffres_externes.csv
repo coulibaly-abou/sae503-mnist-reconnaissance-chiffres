@@ -1,0 +1,121 @@
+police,style,chiffre,predit,confiance_pct,correct
+Segoe Print,manuscrit,0,0,100.0,True
+Segoe Print,manuscrit,1,1,99.9,True
+Segoe Print,manuscrit,2,2,100.0,True
+Segoe Print,manuscrit,3,3,100.0,True
+Segoe Print,manuscrit,4,4,100.0,True
+Segoe Print,manuscrit,5,5,100.0,True
+Segoe Print,manuscrit,6,6,100.0,True
+Segoe Print,manuscrit,7,7,100.0,True
+Segoe Print,manuscrit,8,8,100.0,True
+Segoe Print,manuscrit,9,9,100.0,True
+Segoe Script,manuscrit,0,0,100.0,True
+Segoe Script,manuscrit,1,1,99.9,True
+Segoe Script,manuscrit,2,2,100.0,True
+Segoe Script,manuscrit,3,3,100.0,True
+Segoe Script,manuscrit,4,4,100.0,True
+Segoe Script,manuscrit,5,5,100.0,True
+Segoe Script,manuscrit,6,6,100.0,True
+Segoe Script,manuscrit,7,7,100.0,True
+Segoe Script,manuscrit,8,8,100.0,True
+Segoe Script,manuscrit,9,9,100.0,True
+Ink Free,manuscrit,0,0,100.0,True
+Ink Free,manuscrit,1,1,85.1,True
+Ink Free,manuscrit,2,2,100.0,True
+Ink Free,manuscrit,3,3,100.0,True
+Ink Free,manuscrit,4,4,100.0,True
+Ink Free,manuscrit,5,5,100.0,True
+Ink Free,manuscrit,6,6,100.0,True
+Ink Free,manuscrit,7,7,100.0,True
+Ink Free,manuscrit,8,8,100.0,True
+Ink Free,manuscrit,9,9,100.0,True
+Lucida Handwriting,manuscrit,0,0,100.0,True
+Lucida Handwriting,manuscrit,1,1,99.9,True
+Lucida Handwriting,manuscrit,2,2,100.0,True
+Lucida Handwriting,manuscrit,3,3,100.0,True
+Lucida Handwriting,manuscrit,4,4,100.0,True
+Lucida Handwriting,manuscrit,5,5,100.0,True
+Lucida Handwriting,manuscrit,6,6,98.6,True
+Lucida Handwriting,manuscrit,7,7,100.0,True
+Lucida Handwriting,manuscrit,8,8,100.0,True
+Lucida Handwriting,manuscrit,9,9,100.0,True
+Bradley Hand,manuscrit,0,0,100.0,True
+Bradley Hand,manuscrit,1,1,100.0,True
+Bradley Hand,manuscrit,2,2,100.0,True
+Bradley Hand,manuscrit,3,3,100.0,True
+Bradley Hand,manuscrit,4,4,100.0,True
+Bradley Hand,manuscrit,5,5,100.0,True
+Bradley Hand,manuscrit,6,6,100.0,True
+Bradley Hand,manuscrit,7,7,100.0,True
+Bradley Hand,manuscrit,8,8,100.0,True
+Bradley Hand,manuscrit,9,9,99.2,True
+Kristen ITC,manuscrit,0,0,100.0,True
+Kristen ITC,manuscrit,1,1,99.7,True
+Kristen ITC,manuscrit,2,2,100.0,True
+Kristen ITC,manuscrit,3,3,100.0,True
+Kristen ITC,manuscrit,4,4,100.0,True
+Kristen ITC,manuscrit,5,5,100.0,True
+Kristen ITC,manuscrit,6,6,99.9,True
+Kristen ITC,manuscrit,7,7,100.0,True
+Kristen ITC,manuscrit,8,8,100.0,True
+Kristen ITC,manuscrit,9,9,100.0,True
+MV Boli,manuscrit,0,0,100.0,True
+MV Boli,manuscrit,1,7,98.7,False
+MV Boli,manuscrit,2,2,100.0,True
+MV Boli,manuscrit,3,3,100.0,True
+MV Boli,manuscrit,4,4,100.0,True
+MV Boli,manuscrit,5,5,100.0,True
+MV Boli,manuscrit,6,6,91.2,True
+MV Boli,manuscrit,7,7,100.0,True
+MV Boli,manuscrit,8,8,100.0,True
+MV Boli,manuscrit,9,9,100.0,True
+Comic Sans,manuscrit,0,0,100.0,True
+Comic Sans,manuscrit,1,1,99.9,True
+Comic Sans,manuscrit,2,2,100.0,True
+Comic Sans,manuscrit,3,3,100.0,True
+Comic Sans,manuscrit,4,4,100.0,True
+Comic Sans,manuscrit,5,5,100.0,True
+Comic Sans,manuscrit,6,6,100.0,True
+Comic Sans,manuscrit,7,7,100.0,True
+Comic Sans,manuscrit,8,8,100.0,True
+Comic Sans,manuscrit,9,9,100.0,True
+Arial,imprimerie,0,0,100.0,True
+Arial,imprimerie,1,1,95.9,True
+Arial,imprimerie,2,2,100.0,True
+Arial,imprimerie,3,3,100.0,True
+Arial,imprimerie,4,4,100.0,True
+Arial,imprimerie,5,5,100.0,True
+Arial,imprimerie,6,6,83.7,True
+Arial,imprimerie,7,7,100.0,True
+Arial,imprimerie,8,8,100.0,True
+Arial,imprimerie,9,9,100.0,True
+Times New Roman,imprimerie,0,0,100.0,True
+Times New Roman,imprimerie,1,1,100.0,True
+Times New Roman,imprimerie,2,2,100.0,True
+Times New Roman,imprimerie,3,3,100.0,True
+Times New Roman,imprimerie,4,4,100.0,True
+Times New Roman,imprimerie,5,5,100.0,True
+Times New Roman,imprimerie,6,6,99.6,True
+Times New Roman,imprimerie,7,7,100.0,True
+Times New Roman,imprimerie,8,8,100.0,True
+Times New Roman,imprimerie,9,9,100.0,True
+Georgia,imprimerie,0,0,100.0,True
+Georgia,imprimerie,1,1,100.0,True
+Georgia,imprimerie,2,2,100.0,True
+Georgia,imprimerie,3,3,100.0,True
+Georgia,imprimerie,4,4,100.0,True
+Georgia,imprimerie,5,5,100.0,True
+Georgia,imprimerie,6,6,99.9,True
+Georgia,imprimerie,7,7,100.0,True
+Georgia,imprimerie,8,8,100.0,True
+Georgia,imprimerie,9,9,100.0,True
+Verdana,imprimerie,0,0,100.0,True
+Verdana,imprimerie,1,1,100.0,True
+Verdana,imprimerie,2,2,100.0,True
+Verdana,imprimerie,3,3,100.0,True
+Verdana,imprimerie,4,4,100.0,True
+Verdana,imprimerie,5,5,100.0,True
+Verdana,imprimerie,6,6,95.9,True
+Verdana,imprimerie,7,7,100.0,True
+Verdana,imprimerie,8,8,100.0,True
+Verdana,imprimerie,9,9,100.0,True

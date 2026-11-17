@@ -1,0 +1,16 @@
+{
+ "n": 10,
+ "n_ok": 10,
+ "detail": {
+  "2": "Chiffre reconnu : 2",
+  "5": "Chiffre reconnu : 5",
+  "6": "Chiffre reconnu : 6",
+  "8": "Chiffre reconnu : 8",
+  "9": "Chiffre reconnu : 9",
+  "7": "Chiffre reconnu : 7",
+  "1": "Chiffre reconnu : 1",
+  "0": "Chiffre reconnu : 0",
+  "4": "Chiffre reconnu : 4",
+  "3": "Chiffre reconnu : 3"
+ }
+}

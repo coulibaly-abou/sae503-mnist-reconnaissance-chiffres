@@ -1,0 +1,121 @@
+{
+ "test": {
+  "Réseau convolutif ajusté": {
+   "acc": 99.65,
+   "err": 0.35,
+   "f1": 99.65,
+   "fit_s": 1023.5
+  },
+  "SVM RBF ajusté": {
+   "acc": 98.71,
+   "err": 1.29,
+   "f1": 98.7,
+   "fit_s": 75.6
+  },
+  "SVM RBF": {
+   "acc": 98.32,
+   "err": 1.68,
+   "f1": 98.31,
+   "fit_s": 46.5
+  },
+  "Perceptron multicouche": {
+   "acc": 98.05,
+   "err": 1.95,
+   "f1": 98.04,
+   "fit_s": 64.7
+  },
+  "KNN (k = 3)": {
+   "acc": 97.59,
+   "err": 2.41,
+   "f1": 97.57,
+   "fit_s": 0.5
+  },
+  "Forêt aléatoire": {
+   "acc": 97.18,
+   "err": 2.82,
+   "f1": 97.16,
+   "fit_s": 23.3
+  },
+  "Régression logistique": {
+   "acc": 92.57,
+   "err": 7.43,
+   "f1": 92.46,
+   "fit_s": 14.5
+  },
+  "Bayésien naïf gaussien": {
+   "acc": 87.75,
+   "err": 12.25,
+   "f1": 87.66,
+   "fit_s": 0.9
+  }
+ },
+ "comparaison_vc": {
+  "Réseau convolutif (CNN)": {
+   "acc": 97.72,
+   "sd": 0.1,
+   "f1": 97.72,
+   "fit_s": 79.0
+  },
+  "SVM RBF": {
+   "acc": 96.59,
+   "sd": 0.32,
+   "f1": 96.59,
+   "fit_s": 1.4
+  },
+  "KNN (k = 3)": {
+   "acc": 95.88,
+   "sd": 0.4,
+   "f1": 95.87,
+   "fit_s": 0.2
+  },
+  "Forêt aléatoire": {
+   "acc": 95.21,
+   "sd": 0.32,
+   "f1": 95.2,
+   "fit_s": 2.9
+  },
+  "Perceptron multicouche": {
+   "acc": 95.01,
+   "sd": 0.53,
+   "f1": 95.0,
+   "fit_s": 9.2
+  },
+  "Régression logistique": {
+   "acc": 90.98,
+   "sd": 0.42,
+   "f1": 90.96,
+   "fit_s": 2.0
+  },
+  "Bayésien naïf gaussien": {
+   "acc": 86.93,
+   "sd": 0.72,
+   "f1": 86.98,
+   "fit_s": 0.2
+  }
+ },
+ "cnn_meilleurs_params": {
+  "lr": 0.003,
+  "dropout": 0.25
+ },
+ "svm_meilleurs_params": {
+  "C": 5.0,
+  "gamma": 0.04
+ },
+ "bootstrap_cnn": [
+  99.65,
+  99.53,
+  99.76
+ ],
+ "cnn_erreur_par_classe": {
+  "0": 0.1,
+  "1": 0.26,
+  "2": 0.29,
+  "3": 0.2,
+  "4": 0.51,
+  "5": 0.56,
+  "6": 0.63,
+  "7": 0.29,
+  "8": 0.31,
+  "9": 0.4
+ }
+}

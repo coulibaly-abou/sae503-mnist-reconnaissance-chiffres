@@ -5,5 +5,9 @@ seaborn>=0.13
 scipy>=1.14
 scikit-learn>=1.5
 geopandas>=1.0
+openpyxl>=3.1
+torch>=2.4          # réseau convolutif (parties 7-8, application)
+streamlit>=1.55     # application de démonstration
+pillow>=10.0
 jupyter
 pymupdf  # uniquement pour extraire la figure de l'article (figures/fig2_*)

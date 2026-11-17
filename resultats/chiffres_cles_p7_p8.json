@@ -1,0 +1,277 @@
+{
+ "n_train": 59922,
+ "n_pixels_utiles": 717,
+ "n_sous_echantillon": 12000,
+ "acp_k_retenu": 50,
+ "selection": {
+  "KNN_10": 90.83,
+  "SVM RBF_10": 92.03,
+  "KNN_20": 95.28,
+  "SVM RBF_20": 95.76,
+  "KNN_35": 95.88,
+  "SVM RBF_35": 96.55,
+  "KNN_50": 95.88,
+  "SVM RBF_50": 96.59,
+  "KNN_87": 95.59,
+  "SVM RBF_87": 96.52,
+  "KNN_150": 95.43,
+  "SVM RBF_150": 96.36,
+  "KNN_717": 95.2,
+  "SVM RBF_717": 95.85
+ },
+ "comparaison_vc": {
+  "Réseau convolutif (CNN)": {
+   "acc": 97.72,
+   "sd": 0.1,
+   "f1": 97.72,
+   "fit_s": 79.0
+  },
+  "SVM RBF": {
+   "acc": 96.59,
+   "sd": 0.32,
+   "f1": 96.59,
+   "fit_s": 1.4
+  },
+  "KNN (k = 3)": {
+   "acc": 95.88,
+   "sd": 0.4,
+   "f1": 95.87,
+   "fit_s": 0.2
+  },
+  "Forêt aléatoire": {
+   "acc": 95.21,
+   "sd": 0.32,
+   "f1": 95.2,
+   "fit_s": 2.9
+  },
+  "Perceptron multicouche": {
+   "acc": 95.01,
+   "sd": 0.53,
+   "f1": 95.0,
+   "fit_s": 9.2
+  },
+  "Régression logistique": {
+   "acc": 90.98,
+   "sd": 0.42,
+   "f1": 90.96,
+   "fit_s": 2.0
+  },
+  "Bayésien naïf gaussien": {
+   "acc": 86.93,
+   "sd": 0.72,
+   "f1": 86.98,
+   "fit_s": 0.2
+  }
+ },
+ "svm_meilleurs_params": {
+  "C": 5.0,
+  "gamma": 0.04
+ },
+ "svm_gs_acc": 97.22,
+ "svm_defaut_acc_cv3": 96.41,
+ "cnn_meilleurs_params": {
+  "lr": 0.003,
+  "dropout": 0.25
+ },
+ "cnn_gs_acc": 98.12,
+ "test": {
+  "Réseau convolutif ajusté": {
+   "acc": 99.65,
+   "err": 0.35,
+   "f1": 99.65,
+   "fit_s": 1023.5
+  },
+  "SVM RBF ajusté": {
+   "acc": 98.71,
+   "err": 1.29,
+   "f1": 98.7,
+   "fit_s": 75.6
+  },
+  "SVM RBF": {
+   "acc": 98.32,
+   "err": 1.68,
+   "f1": 98.31,
+   "fit_s": 46.5
+  },
+  "Perceptron multicouche": {
+   "acc": 98.05,
+   "err": 1.95,
+   "f1": 98.04,
+   "fit_s": 64.7
+  },
+  "KNN (k = 3)": {
+   "acc": 97.59,
+   "err": 2.41,
+   "f1": 97.57,
+   "fit_s": 0.5
+  },
+  "Forêt aléatoire": {
+   "acc": 97.18,
+   "err": 2.82,
+   "f1": 97.16,
+   "fit_s": 23.3
+  },
+  "Régression logistique": {
+   "acc": 92.57,
+   "err": 7.43,
+   "f1": 92.46,
+   "fit_s": 14.5
+  },
+  "Bayésien naïf gaussien": {
+   "acc": 87.75,
+   "err": 12.25,
+   "f1": 87.66,
+   "fit_s": 0.9
+  }
+ },
+ "nettoyage": {
+  "acc_sans_retrait": 98.64,
+  "acc_avec_retrait": 98.71,
+  "n_erreurs_sans": 136,
+  "n_erreurs_avec": 129
+ },
+ "cnn_confusions": [
+  "9 lu comme 4 (4)",
+  "6 lu comme 0 (3)",
+  "5 lu comme 3 (3)",
+  "8 lu comme 2 (2)"
+ ],
+ "cnn_n_erreurs": 35,
+ "cnn_erreur_par_classe": {
+  "0": 0.1,
+  "1": 0.26,
+  "2": 0.29,
+  "3": 0.2,
+  "4": 0.51,
+  "5": 0.56,
+  "6": 0.63,
+  "7": 0.29,
+  "8": 0.31,
+  "9": 0.4
+ },
+ "boot_diff_part_positive_pct": 100.0,
+ "bootstrap_B": 5000,
+ "bootstrap": {
+  "Accuracy Réseau convolutif ajusté": [
+   99.65,
+   99.53,
+   99.76
+  ],
+  "Accuracy SVM RBF ajusté": [
+   98.71,
+   98.48,
+   98.92
+  ],
+  "Écart d'accuracy CNN - SVM (points)": [
+   0.94,
+   0.73,
+   1.17
+  ],
+  "Erreur du CNN sur le chiffre 0": [
+   0.1,
+   0.0,
+   0.31
+  ],
+  "Erreur du CNN sur le chiffre 1": [
+   0.26,
+   0.0,
+   0.62
+  ],
+  "Erreur du CNN sur le chiffre 2": [
+   0.29,
+   0.0,
+   0.68
+  ],
+  "Erreur du CNN sur le chiffre 3": [
+   0.2,
+   0.0,
+   0.5
+  ],
+  "Erreur du CNN sur le chiffre 4": [
+   0.51,
+   0.1,
+   1.02
+  ],
+  "Erreur du CNN sur le chiffre 5": [
+   0.56,
+   0.11,
+   1.12
+  ],
+  "Erreur du CNN sur le chiffre 6": [
+   0.63,
+   0.21,
+   1.15
+  ],
+  "Erreur du CNN sur le chiffre 7": [
+   0.29,
+   0.0,
+   0.68
+  ],
+  "Erreur du CNN sur le chiffre 8": [
+   0.31,
+   0.0,
+   0.72
+  ],
+  "Erreur du CNN sur le chiffre 9": [
+   0.4,
+   0.1,
+   0.79
+  ],
+  "Encre moyenne du chiffre 0 (pixels pleins)": [
+   135.95,
+   135.1,
+   136.78
+  ],
+  "Encre moyenne du chiffre 1 (pixels pleins)": [
+   59.56,
+   59.15,
+   59.99
+  ],
+  "Encre moyenne du chiffre 2 (pixels pleins)": [
+   116.82,
+   116.07,
+   117.56
+  ],
+  "Encre moyenne du chiffre 3 (pixels pleins)": [
+   110.98,
+   110.21,
+   111.72
+  ],
+  "Encre moyenne du chiffre 4 (pixels pleins)": [
+   95.16,
+   94.53,
+   95.85
+  ],
+  "Encre moyenne du chiffre 5 (pixels pleins)": [
+   100.94,
+   100.12,
+   101.7
+  ],
+  "Encre moyenne du chiffre 6 (pixels pleins)": [
+   107.64,
+   106.89,
+   108.41
+  ],
+  "Encre moyenne du chiffre 7 (pixels pleins)": [
+   89.78,
+   89.19,
+   90.4
+  ],
+  "Encre moyenne du chiffre 8 (pixels pleins)": [
+   117.79,
+   116.95,
+   118.56
+  ],
+  "Encre moyenne du chiffre 9 (pixels pleins)": [
+   96.08,
+   95.48,
+   96.73
+  ]
+ },
+ "ic_normal_cnn": [
+  99.53,
+  99.77
+ ],
+ "date_execution": "2026-11-17",
+ "duree_min": 71.4
+}

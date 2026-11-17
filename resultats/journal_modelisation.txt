@@ -1,0 +1,44 @@
+[  0.0 min] apprentissage : 59922 images (après retrait de 78), test : 10000
+[  0.0 min] 8.i  sélection du nombre de composantes (KNN et SVM en validation croisée)
+[  3.5 min]      meilleur nombre de composantes : {'KNN': 35, 'SVM RBF': 50}
+[  3.5 min] 8.ii comparaison des modèles en validation croisée à 5 plis
+[  3.5 min]      Bayésien naïf gaussien       accuracy 86.93 %
+[  3.6 min]      Régression logistique        accuracy 90.98 %
+[  3.9 min]      Forêt aléatoire              accuracy 95.21 %
+[  3.9 min]      KNN (k = 3)                  accuracy 95.88 %
+[  4.1 min]      SVM RBF                      accuracy 96.59 %
+[  4.9 min]      Perceptron multicouche       accuracy 95.01 %
+[ 11.5 min]      Réseau convolutif (CNN)      accuracy 97.72 %
+[ 11.6 min] 8.v  grid search du SVM RBF
+[ 13.8 min]      meilleurs paramètres SVM : {'C': 5, 'gamma': 0.04} (97.22 %)
+[ 13.8 min] 8.v  grid search du CNN (VC 3 plis)
+[ 19.0 min]      lr=0.001 dropout=0.1 : 97.52 %
+[ 23.6 min]      lr=0.001 dropout=0.25 : 97.45 %
+[ 39.4 min]      lr=0.001 dropout=0.4 : 97.33 %
+[ 42.5 min]      lr=0.003 dropout=0.1 : 98.10 %
+[ 45.6 min]      lr=0.003 dropout=0.25 : 98.12 %
+[ 48.8 min]      lr=0.003 dropout=0.4 : 97.78 %
+[ 48.8 min] 8.vi apprentissage complet et prédiction sur le test
+[ 48.8 min]      Bayésien naïf gaussien       test 87.75 %
+[ 49.0 min]      Régression logistique        test 92.57 %
+[ 49.4 min]      Forêt aléatoire              test 97.18 %
+[ 49.4 min]      KNN (k = 3)                  test 97.59 %
+[ 50.4 min]      SVM RBF                      test 98.32 %
+[ 51.5 min]      Perceptron multicouche       test 98.05 %
+[ 54.1 min]     époque 1/12 : perte 0.3248
+[ 55.8 min]     époque 2/12 : perte 0.1111
+[ 57.2 min]     époque 3/12 : perte 0.0837
+[ 58.6 min]     époque 4/12 : perte 0.0761
+[ 60.0 min]     époque 5/12 : perte 0.0627
+[ 61.4 min]     époque 6/12 : perte 0.0547
+[ 62.8 min]     époque 7/12 : perte 0.0474
+[ 64.2 min]     époque 8/12 : perte 0.0434
+[ 65.6 min]     époque 9/12 : perte 0.0374
+[ 67.0 min]     époque 10/12 : perte 0.0339
+[ 68.4 min]     époque 11/12 : perte 0.0305
+[ 69.7 min]     époque 12/12 : perte 0.0301
+[ 69.8 min]      SVM ajusté 98.71 % | CNN ajusté 99.65 %
+[ 69.8 min]      effet du nettoyage (SVM ajusté avec les 60 000 images d'origine)
+[ 71.3 min]      {'acc_sans_retrait': 98.64, 'acc_avec_retrait': 98.71, 'n_erreurs_sans': 136, 'n_erreurs_avec': 129}
+[ 71.3 min] 7.   bootstrap
+[ 71.4 min] terminé

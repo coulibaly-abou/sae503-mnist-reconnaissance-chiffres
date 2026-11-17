@@ -1,0 +1,9 @@
+modele,parametres,temps_apprentissage_s,accuracy_pct,erreur_pct,f1_macro_pct
+Réseau convolutif ajusté,"lr = 0.003, dropout = 0.25, 12 époques, augmentation",1023.51,99.65,0.35,99.65
+SVM RBF ajusté,"C = 5, gamma = 0.04",75.57,98.71,1.29,98.70
+SVM RBF,par défaut,46.53,98.32,1.68,98.31
+Perceptron multicouche,par défaut,64.75,98.05,1.95,98.04
+KNN (k = 3),par défaut,0.45,97.59,2.41,97.57
+Forêt aléatoire,par défaut,23.30,97.18,2.82,97.16
+Régression logistique,par défaut,14.54,92.57,7.43,92.46
+Bayésien naïf gaussien,par défaut,0.90,87.75,12.25,87.66
