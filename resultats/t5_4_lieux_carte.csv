@@ -1,0 +1,6 @@
+lieu,lat,lon,rôle
+"NIST (Gaithersburg, MD)",39.1336,-77.2167,"Collecte des données (SD-1, SD-3)"
+"US Census Bureau (Suitland, MD)",38.8468,-76.9283,Scripteurs (SD-3)
+"AT&T Bell Labs (Holmdel, NJ)",40.3707,-74.172,Construction de MNIST
+"Westcliff University (Irvine, CA)",33.6846,-117.8265,Auteurs de l'article étudié
+"SIAT – CAS (Shenzhen, Chine)",22.5964,113.9939,Auteurs de l'article étudié

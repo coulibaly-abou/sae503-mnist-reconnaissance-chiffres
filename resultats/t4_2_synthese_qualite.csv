@@ -1,0 +1,10 @@
+dimension,contrôle,résultat,action
+Intégrité,"En-têtes IDX (nombre magique, tailles)",conforme,aucune
+Complétude,Valeurs manquantes,0,aucune
+Validité,"Pixels ∈ [0 ; 255], labels ∈ {0..9}",conforme,aucune
+Unicité,Doublons exacts (train / test / croisés),0 / 0 / 0,aucune
+Cohérence,Même image avec labels différents,0,aucune
+Représentativité,Ratio classe max / min (train),1.24,pas de rééquilibrage
+Homogénéité,Distribution des classes train vs test (χ²),p = 0.97,aucune
+Pertinence,Pixels de variance nulle,67 (8.5 %),à retirer pour la modélisation
+Conformité,Chiffre inscrit dans une boîte ≤ 20 × 20,100.0 %,aucune

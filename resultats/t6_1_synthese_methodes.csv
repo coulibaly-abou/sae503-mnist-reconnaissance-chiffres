@@ -1,0 +1,6 @@
+méthode,images signalées,% de l'apprentissage
+"Encre – z-score robuste (|z| > 3,5)",191,0.32
+Erreur de reconstruction ACP (20 CP / classe),606,1.01
+Isolation Forest (300 arbres),606,1.01
+LOF (20 voisins),606,1.01
+Consensus ≥ 2 méthodes multivariées,320,0.53

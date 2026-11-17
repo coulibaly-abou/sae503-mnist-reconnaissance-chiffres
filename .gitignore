@@ -1,0 +1,8 @@
+__pycache__/
+.ipynb_checkpoints/
+desktop.ini
+*.gdoc
+*.gsheet
+~$*
+# Article sous droits d'auteur (référence citée dans le README)
+docs/28_MNISTDatasets_DataMining.pdf
