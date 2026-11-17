@@ -1,5 +1,9 @@
 # SAÉ 5.03 – Data mining sur MNIST : reconnaissance de chiffres manuscrits
 
+[![Ouvrir l'application](https://static.streamlit.io/badges/streamlit_badge_black_white.svg)](https://mnist-reconnaissance-chiffres.streamlit.app/)
+
+**Application en ligne : https://mnist-reconnaissance-chiffres.streamlit.app/** : dessinez un chiffre, le modèle le reconnaît.
+
 Projet de BUT Science des Données (3e année, 2026-2027, IUT de Perpignan, enseignant : Sébastien Pinel).
 Auteurs : **Ayi AMAVIGAN** et **Aboubakar COULIBALY**.
 
@@ -28,6 +32,10 @@ sept modèles de classification. Le meilleur modèle, un réseau convolutif, est
 Le rapport complet est dans [`rapport/AMAVIGAN_COULIBALY_rapport_SAE503.pdf`](rapport/AMAVIGAN_COULIBALY_rapport_SAE503.pdf).
 
 ## Tester l'application
+
+En ligne : **https://mnist-reconnaissance-chiffres.streamlit.app/**
+
+Ou en local :
 
 ```bash
 pip install -r app/requirements.txt
