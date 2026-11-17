@@ -20,6 +20,7 @@ C = json.loads((RES / "chiffres_cles_p7_p8.json").read_text(encoding="utf-8"))
 C6 = json.loads((RES / "chiffres_cles_p6.json").read_text(encoding="utf-8"))
 EXT = json.loads((RES / "chiffres_cles_test_externe.json").read_text(encoding="utf-8"))
 DESSIN = json.loads((RES / "chiffres_cles_dessins.json").read_text(encoding="utf-8"))
+DET = json.loads((RES / "chiffres_cles_detecteur.json").read_text(encoding="utf-8"))
 
 
 def v(x, d=1):
@@ -242,7 +243,7 @@ cur.texte(
     "autres modèles (régression logistique, forêt aléatoire, perceptron, réseau convolutif) reçoivent les "
     "pixels bruts, car ils font eux-mêmes leur sélection : régularisation, choix des variables à chaque "
     "nœud, ou filtres appris.")
-cur.image(FIG / "fig8_1_selection_acp.png", 13)
+cur.image(FIG / "fig8_1_selection_acp.png", 11.5)
 FIGS["acp"] = cur.legende("Figure", "Accuracy en validation croisée selon le nombre de composantes principales conservées")
 
 cur.titre("8.2 Sept modèles comparés en validation croisée")
@@ -286,7 +287,7 @@ cur.texte(
     f"Le meilleur réglage (taux d'apprentissage {v(cp['lr'], 3)}, dropout {v(cp['dropout'], 2)}) atteint "
     f"{v(C['cnn_gs_acc'], 2)} %. Le taux d'apprentissage compte plus que le dropout : passer de 0,001 à 0,003 "
     "fait gagner environ 0,6 point, alors que le dropout ne change le score que de quelques dixièmes.")
-cur.image(FIG / "fig8_3_gridsearch.png", 16)
+cur.image(FIG / "fig8_3_gridsearch.png", 15)
 FIGS["gs"] = cur.legende("Figure", "Grid search : accuracy moyenne en validation croisée à 3 plis pour chaque combinaison "
                       "d'hyperparamètres")
 cur.texte(
@@ -346,10 +347,13 @@ cur.texte(
     "statistique. Les écritures européennes (7 barré, 1 avec un long empattement), absentes de MNIST comme le "
     "rappelait la carte de la partie 5, restent le cas le plus risqué.")
 cur.texte(
-    "Pour que chacun puisse faire ce test, nous avons développé une application Streamlit, disponible avec le "
-    "code sur GitHub. On y dessine un chiffre à la souris ou au doigt, et le modèle affiche le chiffre reconnu "
-    "avec les probabilités des dix classes. Un deuxième onglet tire des images du test au hasard, un troisième "
-    "accepte la photo d'un chiffre écrit sur papier.")
+    "Pour que chacun puisse faire ce test, nous avons mis en ligne une application Streamlit "
+    "(mnist-reconnaissance-chiffres.streamlit.app) : on y dessine un chiffre, on tire une image du test ou on "
+    "importe une photo. Les premiers essais ont montré que le classifieur répond toujours un chiffre, même "
+    "devant un cadre rempli ou une étoile. L'application filtre donc les dessins : elle refuse un tracé qui "
+    "couvre plus de 45 % de l'image, puis un second réseau, entraîné à distinguer les chiffres de dessins "
+    f"quelconques, écarte le reste ({v(DET['chiffres_test_acceptes_pct'], 1)} % des chiffres du test acceptés, "
+    f"{v(DET['non_chiffres_rejetes_pct'], 1)} % des dessins quelconques refusés).")
 supprimer(p8)
 
 # ---------------------------------------------------------------------------
@@ -389,8 +393,7 @@ cur.texte(
     "meilleur modèle de l'article, avec un protocole plus rigoureux. Le test sur nos propres chiffres est "
     "encourageant, puisque presque tous sont reconnus, mais il porte sur des chiffres bien formés : un modèle "
     "ne vaut que pour des données qui ressemblent à celles de son apprentissage. "
-    "Plusieurs pistes restent ouvertes : des réseaux plus profonds, l'apprentissage sur des écritures plus "
-    "variées, ou l'application de la même démarche à des lettres manuscrites.")
+    "Il reste à l'entraîner sur des écritures plus variées, voire sur des lettres manuscrites.")
 supprimer(p)
 
 # ---------------------------------------------------------------------------
@@ -472,7 +475,7 @@ supprimer(p)
 
 p = trouver("L'ensemble du code est fourni dans le notebook")
 remplacer_paragraphe(p, (
-    "Le code complet est sur GitHub (github.com/coulibaly-abou/sae503-mnist-reconnaissance-chiffres). Les "
+    "Le code complet est sur GitHub (github.com/coulibaly-abou/sae503-mnist-reconnaissance-chiffres) et l'application est en ligne (mnist-reconnaissance-chiffres.streamlit.app). Les "
     "parties 3 à 5 sont dans notebooks/SAE503_MNIST_exploration.ipynb, la partie 6 dans "
     "notebooks/SAE503_MNIST_anomalies.ipynb, les parties 7 et 8 dans scripts/modelisation.py (avec "
     "scripts/cnn.py pour le réseau convolutif) et le test sur les polices dans "
