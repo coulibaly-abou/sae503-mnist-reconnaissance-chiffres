@@ -17,7 +17,7 @@ from PIL import Image
 ICI = Path(__file__).resolve().parent
 sys.path.insert(0, str(ICI.parent / "scripts"))
 from cnn import PetitCNN, probabilites  # noqa: E402
-from pretraitement import vers_mnist  # noqa: E402
+from pretraitement import photo_vers_mnist, vers_mnist  # noqa: E402
 
 st.set_page_config(page_title="Reconnaissance de chiffres manuscrits", page_icon=":material/draw:",
                    layout="wide")
@@ -218,10 +218,11 @@ with onglet_mnist:
     afficher_prediction(images[i], verite=int(etiquettes[i]))
 
 with onglet_photo:
-    st.markdown("Photographiez un chiffre écrit **au feutre sur une feuille blanche**, recadré au plus près.")
+    st.markdown("Photographiez un chiffre écrit sur une feuille (stylo ou feutre). Le fond gris, les ombres "
+                "et le trait fin sont corrigés automatiquement ; évitez seulement d'avoir d'autres traits dans l'image.")
     fichier = st.file_uploader("Image (PNG ou JPG)", type=["png", "jpg", "jpeg"])
     if fichier:
-        image28 = vers_mnist(Image.open(fichier))
+        image28 = photo_vers_mnist(Image.open(fichier))
         if image28 is None:
             st.error("Aucun tracé détecté dans l'image.")
         else:
