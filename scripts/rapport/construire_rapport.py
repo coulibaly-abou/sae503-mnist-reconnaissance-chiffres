@@ -27,6 +27,7 @@ C6 = json.loads((RES / "chiffres_cles_p6.json").read_text(encoding="utf-8"))
 EXT = json.loads((RES / "chiffres_cles_test_externe.json").read_text(encoding="utf-8"))
 DESSIN = json.loads((RES / "chiffres_cles_dessins.json").read_text(encoding="utf-8"))
 DET = json.loads((RES / "chiffres_cles_detecteur.json").read_text(encoding="utf-8"))
+PHOTO = json.loads((RES / "chiffres_cles_photo.json").read_text(encoding="utf-8"))
 
 
 def v(x, d=1):
@@ -363,7 +364,8 @@ cur.texte(
     "l'augmentation de données et à une préparation des images identique à celle de MNIST. Il faut toutefois "
     "les nuancer : les chiffres des polices sont propres et bien formés, et dix dessins ne font pas un test "
     "statistique. Les écritures européennes (7 barré, 1 avec un long empattement), absentes de MNIST comme le "
-    "rappelait la carte de la partie 5, restent le cas le plus risqué.")
+    "rappelait la carte de la partie 5, restent le cas le plus risqué : notre photo d'un 7 barré n'a été "
+    "reconnue qu'après une correction de l'application (annexe 4).")
 cur.texte(
     "Pour que chacun puisse faire ce test, nous avons mis en ligne une application Streamlit "
     f"([mnist-reconnaissance-chiffres.streamlit.app]({APP}), présentée en annexe 4) : on y dessine un "
@@ -557,7 +559,7 @@ for t in ["**Dessiner** : on trace un chiffre à la souris ou au doigt, et le mo
           "sa confiance et les probabilités des dix classes (figure suivante) ;",
           "**Images MNIST** : on tire au hasard une image du jeu de test et on compare la réponse du modèle à la "
           "bonne réponse ;",
-          "**Importer une image** : on envoie la photo d'un chiffre écrit au feutre sur une feuille blanche ;",
+          "**Importer une image** : on envoie la photo d'un chiffre écrit sur une feuille, prise au téléphone ;",
           "**Le modèle** : les résultats sur le test, l'intervalle de confiance et l'erreur par chiffre."]:
     cur.texte(t, puce=True)
 cur.image(FIG / "figA4_application_chiffre.png", 15.5)
@@ -566,6 +568,30 @@ cur.texte("Quand le dessin n'est pas un chiffre (cadre rempli, gribouillis, lett
           "lieu d'inventer une réponse :")
 cur.image(FIG / "figA4_application_refus.png", 15.5)
 FIGS["app2"] = cur.legende("Figure", "Application en ligne : un cadre entièrement rempli est refusé")
+cur.texte("**Le cas des photos.** Notre premier essai avec une vraie photo a échoué. Nous avions écrit un 7 "
+          "barré au stylo bille, à la française, et l'avions photographié au téléphone. L'application a répondu "
+          "« pas un chiffre ». En regardant l'image transmise au modèle (§fig:photo§, au centre), nous avons "
+          "compris : la préparation avait été réglée pour un chiffre au feutre sur une feuille bien blanche. "
+          "Sur la photo, le papier est gris (niveau 168 sur 255) et plus sombre dans un coin. Tout le fond "
+          "avait donc été pris pour de l'encre, et le chiffre ne formait plus qu'une petite tache au milieu "
+          "d'un rectangle gris. Le modèle n'avait jamais vu le 7.")
+cur.texte("Nous avons ajouté une préparation propre aux photos "
+          f"([scripts/pretraitement.py]({gh('scripts/pretraitement.py')}), fonction photo_vers_mnist). "
+          "Elle estime la couleur du papier autour de chaque point et la soustrait, ce qui efface les ombres. "
+          "Elle sépare ensuite l'encre du papier par le seuil d'Otsu et retire les petites taches. Enfin, elle "
+          "épaissit le trait. Un stylo fin sur une grande photo devient presque invisible une fois réduit à "
+          "20 pixels, alors que dans MNIST l'épaisseur du trait vaut environ 13 % de la hauteur du chiffre "
+          "(médiane mesurée sur 2 000 images du test). Avec cette correction, le même 7 barré est reconnu à "
+          f"{v(PHOTO['nouveau']['confiance_pct'], 0)} % (à droite). Pour vérifier que ce n'était pas un coup "
+          f"de chance, nous avons fabriqué {PHOTO['fausses_photos']['n']} fausses photos (les chiffres des 12 "
+          "polices, au trait fin, sur un papier gris avec une ombre et une tache) : "
+          f"{PHOTO['fausses_photos']['justes']} sont bien lues. La seule erreur est le 1 de "
+          "MV Boli, déjà mal lu dans le test sur les polices. Cet épisode nous a appris qu'un bon score sur "
+          "MNIST ne dit rien de la façon dont les images arrivent au modèle : dans une application réelle, la "
+          "préparation des données compte autant que le classifieur.")
+cur.image(FIG / "figA4_photo.png", 15.5)
+FIGS["photo"] = cur.legende("Figure", "Photo d'un 7 barré : image vue par le modèle avant et après la correction de "
+                        "la préparation des photos")
 
 
 # ---------------------------------------------------------------------------

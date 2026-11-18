@@ -43,7 +43,8 @@ streamlit run app/app.py
 ```
 
 Trois onglets : **Dessiner** (souris ou doigt), **Images MNIST** (images du test tirées au hasard) et
-**Importer une image** (photo d'un chiffre écrit au feutre). L'onglet **Le modèle** reprend les résultats.
+**Importer une image** (photo d'un chiffre prise au téléphone : le fond gris, les ombres et le trait fin sont
+corrigés par `photo_vers_mnist` dans `scripts/pretraitement.py`). L'onglet **Le modèle** reprend les résultats.
 
 **Et si on dessine n'importe quoi ?** Le classifieur a appris à choisir entre 0 et 9 : face à un
 gribouillis, il répond quand même un chiffre, parfois avec 100 % de confiance. L'application filtre donc
@@ -72,6 +73,7 @@ Déploiement sur Streamlit Community Cloud : choisir ce dépôt, la branche `mai
 | `scripts/test_chiffres_externes.py` | Test du modèle sur des chiffres écrits avec des polices Windows |
 | `scripts/detecteur_non_chiffre.py` | Détecteur « chiffre / pas un chiffre » utilisé comme filtre par l'application |
 | `scripts/gantt.py`, `scripts/resume_graphique.py`, `scripts/flowchart.py` | Figures du rapport |
+| `scripts/figure_photo.py`, `data/photos/` | Photo d'un 7 barré avant/après correction et test sur 120 fausses photos (annexe 4) |
 | `scripts/rapport/` | Construction du rapport Word à partir des résultats (python-docx, Word pour le PDF) |
 | `app/` | Application Streamlit, modèle entraîné (`modele_cnn.pt`), détecteur (`detecteur.pt`) et 1 000 images de test |
 | `figures/`, `resultats/` | Figures (PNG 200 dpi), tableaux CSV et chiffres clés JSON |

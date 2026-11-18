@@ -1,0 +1,23 @@
+{
+  "ancien": {
+    "predit": 2,
+    "confiance_pct": 47.6,
+    "detecteur_chiffre_pct": 0.0
+  },
+  "nouveau": {
+    "predit": 7,
+    "confiance_pct": 100.0,
+    "detecteur_chiffre_pct": 99.2
+  },
+  "fausses_photos": {
+    "n": 120,
+    "justes": 119,
+    "erreurs": [
+      {
+        "police": "mvboli.ttf",
+        "chiffre": 1,
+        "predit": 7
+      }
+    ]
+  }
+}
